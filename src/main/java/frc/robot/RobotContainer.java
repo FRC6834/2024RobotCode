@@ -19,6 +19,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -33,6 +34,8 @@ import java.util.List;
  */
 public class RobotContainer {
   // The robot's subsystems
+  private final IntakeSubsystem intake = new IntakeSubsystem();
+private final IntakeSubsystem shooter = new IntakeSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
   // The driver's controller
@@ -69,10 +72,19 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(controller1, Button.kRightBumper.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotDrive.setX(),
-            m_robotDrive));
-  }
+        .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
+
+        //for intake, runs when b  button is pressed
+        new JoystickButton(controller1, Button.kB.value)
+        .whileTrue(new RunCommand(() -> intake.startMotor(), intake))   
+        .whileFalse(new RunCommand(() -> intake.stopMotor(), intake));
+
+        //for shooter, runs when a button is pressed
+        new JoystickButton(controller1, Button.kA.value)
+        .whileTrue(new RunCommand(() -> shooter.startMotor(), shooter))   
+        .whileFalse(new RunCommand(() -> shooter.stopMotor(), shooter));
+
+      }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
