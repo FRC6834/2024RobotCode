@@ -34,8 +34,8 @@ import java.util.List;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final IntakeSubsystem intake = new IntakeSubsystem();
-private final IntakeSubsystem shooter = new IntakeSubsystem();
+  //private final IntakeSubsystem intake = new IntakeSubsystem();
+  //private final IntakeSubsystem shooter = new IntakeSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
   // The driver's controller
@@ -73,7 +73,7 @@ private final IntakeSubsystem shooter = new IntakeSubsystem();
   private void configureButtonBindings() {
     new JoystickButton(controller1, Button.kRightBumper.value)
         .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-
+        /* 
         //for intake, runs when b  button is pressed
         new JoystickButton(controller1, Button.kB.value)
         .whileTrue(new RunCommand(() -> intake.startMotor(), intake))   
@@ -83,7 +83,7 @@ private final IntakeSubsystem shooter = new IntakeSubsystem();
         new JoystickButton(controller1, Button.kA.value)
         .whileTrue(new RunCommand(() -> shooter.startMotor(), shooter))   
         .whileFalse(new RunCommand(() -> shooter.stopMotor(), shooter));
-
+        */
       }
 
   /**
@@ -104,7 +104,7 @@ private final IntakeSubsystem shooter = new IntakeSubsystem();
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+        List.of(new Translation2d(1, 0), new Translation2d(2, 0)),
         // End 3 meters straight ahead of where we started, facing forward
         new Pose2d(3, 0, new Rotation2d(0)),
         config);

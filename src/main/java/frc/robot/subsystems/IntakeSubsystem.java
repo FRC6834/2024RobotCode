@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
     //Remember to update ID
-    private final CANSparkMax runMotor = new CANSparkMax(1, MotorType.kBrushless);
+    private final CANSparkMax runMotor = new CANSparkMax(12, MotorType.kBrushless);
 
 
 
