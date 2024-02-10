@@ -19,6 +19,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -37,6 +38,8 @@ public class RobotContainer {
   //private final IntakeSubsystem intake = new IntakeSubsystem();
   //private final IntakeSubsystem shooter = new IntakeSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
 
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
@@ -73,17 +76,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(controller1, Button.kRightBumper.value)
         .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-        /* 
+         
         //for intake, runs when b  button is pressed
         new JoystickButton(controller1, Button.kB.value)
-        .whileTrue(new RunCommand(() -> intake.startMotor(), intake))   
-        .whileFalse(new RunCommand(() -> intake.stopMotor(), intake));
+        .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))   
+        .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem));
 
         //for shooter, runs when a button is pressed
         new JoystickButton(controller1, Button.kA.value)
-        .whileTrue(new RunCommand(() -> shooter.startMotor(), shooter))   
-        .whileFalse(new RunCommand(() -> shooter.stopMotor(), shooter));
-        */
+        .whileTrue(new RunCommand(() -> m_shooter.startMotor(), m_shooter))   
+        .whileFalse(new RunCommand(() -> m_shooter.stopMotor(), m_shooter));
+        
       }
 
   /**
