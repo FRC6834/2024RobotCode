@@ -79,7 +79,7 @@ public class RobotContainer {
          
         //for intake, runs when b  button is pressed
         new JoystickButton(controller1, Button.kB.value)
-        .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))   
+        .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))  
         .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem));
 
         //for shooter, runs when a button is pressed
