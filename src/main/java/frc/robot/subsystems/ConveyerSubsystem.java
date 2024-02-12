@@ -9,7 +9,7 @@ public class ConveyerSubsystem extends SubsystemBase {
 
     //Instead of directly passing in CAN ID, use variable created in Constants.java
     //Delete this comment when fixed - George
-    private final CANSparkMax runMotor = new CANSparkMax(SubsystemConstants.kConveyorBelt, MotorType.kBrushless);
+    private final CANSparkMax conveyorMotor = new CANSparkMax(SubsystemConstants.kConveyorBelt, MotorType.kBrushless);
 
     //We want to have the ability to move the game piece forward and backward when it is inside of the conveyor
     //Both of these methods should run the conveyor at roughly 30% speed

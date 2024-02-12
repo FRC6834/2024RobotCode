@@ -8,7 +8,7 @@ import frc.robot.Constants.SubsystemConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
     //choose better variable name
-    private final CANSparkMax runMotor = new CANSparkMax(SubsystemConstants.kIntakeSystem, MotorType.kBrushless);
+    private final CANSparkMax kIntakeSystem = new CANSparkMax(SubsystemConstants.kIntakeSystem, MotorType.kBrushless);
 
     //change speed to 50% speed
     public void startMotor(){
