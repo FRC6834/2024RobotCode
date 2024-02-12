@@ -16,11 +16,14 @@ public class ConveyerSubsystem extends SubsystemBase {
     //There should be an additional method that runs the conveyor forward at 90% speed
     //Choose method names that clearly distinguish which method is which
     //Delete this comment when fixed
-    public void startMotor(){
-        runMotor.set(1);
+    public void forwardMotor(){
+        conveyorMotor.set(.3);
     }
 
     public void stopMotor(){
-        runMotor.set(0);
+        conveyorMotor.set(0);
+    }
+    public void backwardsMotor(){
+        conveyorMotor.set(-.3);
     }
 }

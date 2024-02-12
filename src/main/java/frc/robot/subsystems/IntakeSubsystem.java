@@ -12,10 +12,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
     //change speed to 50% speed
     public void startMotor(){
-        runMotor.set(1);
+        kIntakeSystem.set(0.5);
     }
 
     public void stopMotor(){
-        runMotor.set(0);
+        kIntakeSystem.set(0);
     }
 }
