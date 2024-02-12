@@ -21,5 +21,8 @@ public class ShooterSubsystem extends SubsystemBase {
         rightMotor.set(0);
     }
 
-
+    public void startMotorHalfSpeed(){
+        leftMotor.set(.5);
+        rightMotor.set(-.5);
+    }
 }
