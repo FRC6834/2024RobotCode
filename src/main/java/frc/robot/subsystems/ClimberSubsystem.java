@@ -10,11 +10,17 @@ public class ClimberSubsystem extends SubsystemBase {
     //Need to create 2 climber objects
     //Delete this comment when fixed - George
     private final CANSparkMax runMotor = new CANSparkMax(15, MotorType.kBrushless);
+    private final CANSparkMax reverseMotor = new CANSparkMax(15, MotorType.kBrushless);
+
 
     //Need ability to make climber go up and down
     //Let's name the methods climbUp and climbDown or something similar
     //Delete this comment when fixed - George
-    public void startMotor(){
+    public void climbUp(){
+        runMotor.set(1);
+    }
+
+    public void climbDown(){
         runMotor.set(1);
     }
 
