@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants;
 
-public class ConveyerSubsystem extends SubsystemBase {
+public class ConveyorSubsystem extends SubsystemBase {
 
     //Instead of directly passing in CAN ID, use variable created in Constants.java
     //Delete this comment when fixed - George
@@ -19,6 +19,9 @@ public class ConveyerSubsystem extends SubsystemBase {
     public void forwardMotor(){
         conveyorMotor.set(.3);
     }
+    public void halfForwardMotor(){
+        conveyorMotor.set(.15);
+    }
 
     public void stopMotor(){
         conveyorMotor.set(0);
@@ -26,7 +29,5 @@ public class ConveyerSubsystem extends SubsystemBase {
     public void backwardsMotor(){
         conveyorMotor.set(-.3);
     }
-    public void fastMotor(){
-        conveyorMotor.set(.9);
-    }
 }
+
