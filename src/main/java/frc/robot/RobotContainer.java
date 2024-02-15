@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -39,7 +40,8 @@ public class RobotContainer {
   //private final IntakeSubsystem shooter = new IntakeSubsystem();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  private final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
+  private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final ClimberSubsystem m_climber = new ClimberSubsystem();
 
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
@@ -76,17 +78,33 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(controller1, Button.kRightBumper.value)
         .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-         
-        //for intake, runs when b  button is pressed
-        new JoystickButton(controller1, Button.kB.value)
-        .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))  
-        .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem));
 
-        //for shooter, runs when a button is pressed
-        new JoystickButton(controller1, Button.kA.value)
-        .whileTrue(new RunCommand(() -> m_shooter.startMotor(), m_shooter))   
+        /*hey guys sarah kleeh here
+        i wrote some xbox button configurations at home (didnt do conveyer bc i ran out of buttons and didnt want to add a 2nd controller without telling ppl)
+        cant test these obv so if somethings broken with the robot and u dont know why try commenting these out because i probably got something wrong*/
+        //i dont remember what the buttons were planned to be so i just put in placeholders. obviously will not be final (i hope) so feel free to change
+
+        //for intake, runs when B button is pressed
+      new JoystickButton(controller1, Button.kB.value)
+        .whileTrue(new RunCommand(() -> m_intake.startMotor(), m_intake))
+        .whileFalse(new RunCommand(() -> m_intake.stopMotor(), m_intake));
+
+        //for shooter (100% speed) runs when X button is pressed
+      new JoystickButton(controller1, Button.kX.value)
+        .whileTrue(new RunCommand(() -> m_shooter.startMotor(), m_shooter))
         .whileFalse(new RunCommand(() -> m_shooter.stopMotor(), m_shooter));
-        
+
+        //for shooter (50% speed) runs when Y button is pressed
+      new JoystickButton(controller1, Button.kY.value)
+        .whileTrue(new RunCommand(() -> m_shooter.startMotorHalfSpeed(), m_shooter))
+        .whileFalse(new RunCommand(() -> m_shooter.stopMotor(), m_shooter));
+
+        //for climber. goes up when the left bumper is pressed and goes down for right bumper
+        new JoystickButton(controller1, Button.kLeftBumper.value)
+          .whileTrue(new RunCommand(() -> m_climber.climbUp(), m_climber));
+
+        new JoystickButton(controller1, Button.kRightBumper.value)
+          .whileTrue(new RunCommand(() -> m_climber.climbDown(), m_climber));
       }
 
   /**

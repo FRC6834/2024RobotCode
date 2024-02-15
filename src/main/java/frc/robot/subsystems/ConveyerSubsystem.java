@@ -26,4 +26,7 @@ public class ConveyerSubsystem extends SubsystemBase {
     public void backwardsMotor(){
         conveyorMotor.set(-.3);
     }
+    public void fastMotor(){
+        conveyorMotor.set(.9);
+    }
 }
