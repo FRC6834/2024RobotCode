@@ -14,6 +14,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -27,6 +28,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import java.util.List;
 
 /*
@@ -99,7 +102,25 @@ public class RobotContainer {
         .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem));
 
+      new JoystickButton(controller1, Axis.kRightTrigger.value)
+      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem))
+      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
+
+     
+      new JoystickButton(controller1, Button.kRightBumper.value)
+      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
+      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
+
+      new JoystickButton(controller1, Axis.kLeftTrigger.value)
+      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem))
+      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+
+      new JoystickButton(controller1, Button.kLeftBumper.value) 
+      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftDown(), m_ClimberSubsystem))
+      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
       }
+
+      
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

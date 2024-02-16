@@ -17,16 +17,29 @@ public class ClimberSubsystem extends SubsystemBase {
     //Need ability to make climber go up and down
     //Let's name the methods climbUp and climbDown or something similar
     //Delete this comment when fixed - George
-    public void climbUp(){
+    public void climberLeftUp(){
         climberLeft.set(1);
     }
 
-    public void climbDown(){
+    public void climberLeftDown(){
+        climberLeft.set(-1);
+    }
+
+    public void climberRightUp(){
         climberRight.set(1);
     }
 
-    public void stopMotor(){
+
+    public void climberRightDown(){
+        climberRight.set(-1);
+    }
+
+    public void stopRightMotor(){
         climberRight.set(0);
-        climberLeft.set(0);
+        
     }    
+
+    public void stopLeftMotor(){
+        climberLeft.set(0);
+    }
 }
