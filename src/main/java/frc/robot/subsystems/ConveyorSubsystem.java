@@ -11,21 +11,19 @@ public class ConveyorSubsystem extends SubsystemBase {
     //Delete this comment when fixed - George
     private final CANSparkMax conveyorMotor = new CANSparkMax(SubsystemConstants.kConveyorBelt, MotorType.kBrushless);
 
-    //We want to have the ability to move the game piece forward and backward when it is inside of the conveyor
-    //Both of these methods should run the conveyor at roughly 30% speed
-    //There should be an additional method that runs the conveyor forward at 90% speed
-    //Choose method names that clearly distinguish which method is which
-    //Delete this comment when fixed
+    //Conveyer goes forward - 30% speed
     public void forwardMotor(){
         conveyorMotor.set(.3);
     }
+    //Conveyer goes forward - half normal speed
     public void halfForwardMotor(){
         conveyorMotor.set(.15);
     }
-
+    //Covneyer stops
     public void stopMotor(){
         conveyorMotor.set(0);
     }
+    //Covneyer moves backwards - 30% speed
     public void backwardsMotor(){
         conveyorMotor.set(-.3);
     }

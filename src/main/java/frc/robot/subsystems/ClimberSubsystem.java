@@ -7,38 +7,35 @@ import frc.robot.Constants.SubsystemConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
-    //Instead of directly passing in CAN ID, use variable created in Constants.java
-    //Need to create 2 climber objects
-    //Delete this comment when fixed - George
+    
+    //Climber Variables
     private final CANSparkMax climberLeft = new CANSparkMax(SubsystemConstants.kLeftClimber, MotorType.kBrushless);
     private final CANSparkMax climberRight = new CANSparkMax(SubsystemConstants.kRightClimber, MotorType.kBrushless);
 
 
-    //Need ability to make climber go up and down
-    //Let's name the methods climbUp and climbDown or something similar
-    //Delete this comment when fixed - George
+    //Left Climber goes Up
     public void climberLeftUp(){
         climberLeft.set(1);
     }
-
+    //Left Climber goes Down
     public void climberLeftDown(){
         climberLeft.set(-1);
     }
-
+    //Right Climber goes Up
     public void climberRightUp(){
         climberRight.set(1);
     }
 
-
+    //Right Climber goes DOwn
     public void climberRightDown(){
         climberRight.set(-1);
     }
-
+    //Right Climber no go
     public void stopRightMotor(){
         climberRight.set(0);
         
     }    
-
+    //Left climber no go
     public void stopLeftMotor(){
         climberLeft.set(0);
     }

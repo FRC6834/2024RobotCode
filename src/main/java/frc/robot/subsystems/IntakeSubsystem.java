@@ -14,7 +14,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public void startMotor(){
         kIntakeSystem.set(0.5);
     }
-
+    //stops intakes
     public void stopMotor(){
         kIntakeSystem.set(0);
     }
