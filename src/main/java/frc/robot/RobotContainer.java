@@ -81,40 +81,39 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Brakes for swerve
     new JoystickButton(controller1, Button.kX.value)
         .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-
+      //Runs intake + Covneyer - A Button
+      //conveyer is at half speed
       new JoystickButton(controller1, Button.kA.value)
         .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
         .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem))
-         .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
-
-        
+        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
+      //Runs Conveyer in Reverse - B button
       new JoystickButton(controller1, Button.kB.value)
         .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.backwardsMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
-
-        
+      //Runs shooter + Conveyer - Y button full speed
       new JoystickButton(controller1, Button.kY.value)
         .whileTrue(new RunCommand(() -> m_ShooterSubsystem.startMotor(), m_ShooterSubsystem))
         .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem));
-
+      //right climber goes up - Right Trigger
       new JoystickButton(controller1, Axis.kRightTrigger.value)
       .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem))
       .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-
-     
+      //right climber goes down - right bumper
       new JoystickButton(controller1, Button.kRightBumper.value)
       .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
       .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-
+      //left climber goes up - left trigger
       new JoystickButton(controller1, Axis.kLeftTrigger.value)
       .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem))
       .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
-
+      //left climber goes down - left bumper
       new JoystickButton(controller1, Button.kLeftBumper.value) 
       .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftDown(), m_ClimberSubsystem))
       .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
