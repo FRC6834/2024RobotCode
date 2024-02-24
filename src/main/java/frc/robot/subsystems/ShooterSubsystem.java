@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -23,8 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
         rightMotor.set(0);
     }
     //Shooter runs - 50%
-    public void startMotorHalfSpeed(){
-        leftMotor.set(.5);
-        rightMotor.set(-.5);
+    public void startMotorSlowSpeed(){
+        leftMotor.set(.25);
+        rightMotor.set(-.25);
     }
 }

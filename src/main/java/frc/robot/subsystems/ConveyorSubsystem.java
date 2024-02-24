@@ -13,11 +13,11 @@ public class ConveyorSubsystem extends SubsystemBase {
 
     //Conveyer goes forward - 30% speed
     public void forwardMotor(){
-        conveyorMotor.set(.3);
+        conveyorMotor.set(-.3);
     }
     //Conveyer goes forward - half normal speed
     public void halfForwardMotor(){
-        conveyorMotor.set(.15);
+        conveyorMotor.set(-.15);
     }
     //Covneyer stops
     public void stopMotor(){
@@ -25,7 +25,7 @@ public class ConveyorSubsystem extends SubsystemBase {
     }
     //Covneyer moves backwards - 30% speed
     public void backwardsMotor(){
-        conveyorMotor.set(-.3);
+        conveyorMotor.set(.15);
     }
 }
 

@@ -83,7 +83,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Brakes for swerve
     new JoystickButton(controller1, Button.kX.value)
-        .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
+        //.whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
+        .whileTrue(new RunCommand(() -> m_ShooterSubsystem.startMotorSlowSpeed(), m_ShooterSubsystem))
+        .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
+        .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem))
+        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
       //Runs intake + Covneyer - A Button
       //conveyer is at half speed
       new JoystickButton(controller1, Button.kA.value)

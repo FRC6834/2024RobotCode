@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SubsystemConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
@@ -12,7 +11,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     //change speed to 50% speed
     public void startMotor(){
-        kIntakeSystem.set(0.5);
+        kIntakeSystem.set(-0.35);
     }
     //stops intakes
     public void stopMotor(){
