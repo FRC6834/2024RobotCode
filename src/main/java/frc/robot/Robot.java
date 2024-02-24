@@ -4,9 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,6 +25,11 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private double startTime;
+
+  private ShooterSubsystem m_ShooterSubsystem;
+  private ConveyorSubsystem m_ConveyorSubsystem;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -57,23 +69,33 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    m_ShooterSubsystem = m_robotContainer.getShooterSubsystem();
+    m_ConveyorSubsystem = m_robotContainer.getConveyorSubsystem();
+    startTime = Timer.getFPGATimestamp();
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
      * = new MyAutoCommand(); break; case "Default Auto": default:
      * autonomousCommand = new ExampleCommand(); break; }
      */
-
+    //Code to shoot note during auto, testing to see where to put it
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
+    while(startTime < 1){
+      new RunCommand(() -> m_ShooterSubsystem.startMotor(), m_ShooterSubsystem);
+      new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem);
+    }
+      if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    double time = Timer.getFPGATimestamp();
+    SmartDashboard.putNumber("Time", time);
+
+  }
 
   @Override
   public void teleopInit() {

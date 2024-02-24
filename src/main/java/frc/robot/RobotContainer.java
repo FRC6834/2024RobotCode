@@ -47,7 +47,9 @@ public class RobotContainer {
   private final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
   private final ConveyorSubsystem m_ConveyorSubsystem = new ConveyorSubsystem();
-
+  
+  protected ShooterSubsystem m_Shooter = null;
+  protected ConveyorSubsystem m_Conveyor = null;
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -130,6 +132,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+
+  
+
   public Command getAutonomousCommand() {
     // Create config for trajectory
     TrajectoryConfig config = new TrajectoryConfig(
@@ -149,7 +154,7 @@ public class RobotContainer {
 
     var thetaController = new ProfiledPIDController(
         AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+    thetaController.enableContinuousInput(-2*Math.PI, 2*Math.PI);
 
     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
         exampleTrajectory,
@@ -168,6 +173,18 @@ public class RobotContainer {
 
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false, false));
+  }
+  public ShooterSubsystem getShooterSubsystem(){
+    if(m_ShooterSubsystem == null){
+      m_Shooter = new ShooterSubsystem();
+    }
+    return m_Shooter;
+  }
+  public ConveyorSubsystem getConveyorSubsystem(){
+    if(m_Conveyor == null){
+      m_Conveyor = new ConveyorSubsystem();
+    }
+    return m_Conveyor;
   }
 }
 
