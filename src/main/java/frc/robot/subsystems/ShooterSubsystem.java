@@ -10,12 +10,8 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANSparkMax leftMotor = new CANSparkMax(SubsystemConstants.kLeftShooter, MotorType.kBrushless);
     private final CANSparkMax rightMotor = new CANSparkMax(SubsystemConstants.kRightShooter, MotorType.kBrushless);
 
-<<<<<<< HEAD
-    
-=======
     //Shooter goes - 100%
     //Right is reversed on purpose
->>>>>>> d35d3422fc3aa933170fa87199a2ad492cd01ce0
     public void startMotor(){
         leftMotor.set(1);
         rightMotor.set(-1);

@@ -15,20 +15,20 @@ public class ClimberSubsystem extends SubsystemBase {
 
     //Left Climber goes Up
     public void climberLeftUp(){
-        climberLeft.set(1);
+        climberLeft.set(-.60);
     }
     //Left Climber goes Down
     public void climberLeftDown(){
-        climberLeft.set(-1);
+        climberLeft.set(.60);
     }
     //Right Climber goes Up
     public void climberRightUp(){
-        climberRight.set(1);
+        climberRight.set(.60);
     }
 
     //Right Climber goes DOwn
     public void climberRightDown(){
-        climberRight.set(-1);
+        climberRight.set(-.60);
     }
     //Right Climber no go
     public void stopRightMotor(){
