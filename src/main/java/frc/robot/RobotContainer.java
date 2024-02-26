@@ -27,9 +27,9 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
 import java.util.List;
 
 /*
@@ -53,6 +53,7 @@ public class RobotContainer {
   protected ClimberSubsystem m_Climber = null;
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController commandController1= new CommandXboxController(OIConstants.kDriverControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -86,12 +87,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Brakes for swerve
     new JoystickButton(controller1, Button.kX.value)
-        //.whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-        .whileTrue(new RunCommand(() -> m_ShooterSubsystem.startMotorSlowSpeed(), m_ShooterSubsystem))
-        .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
-        .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem))
-        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
-      //Runs intake + Covneyer - A Button
+      .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
+      //Runs intake + Conveyor - A Button
       //conveyer is at half speed
       new JoystickButton(controller1, Button.kA.value)
         .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
@@ -108,22 +105,23 @@ public class RobotContainer {
         .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem))
         .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem));
-      //right climber goes up - Right Trigger
-      new JoystickButton(controller1, Axis.kRightTrigger.value)
-      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem))
-      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-      //right climber goes down - right bumper
-      new JoystickButton(controller1, Button.kRightBumper.value)
-      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
-      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-      //left climber goes up - left trigger
-      new JoystickButton(controller1, Axis.kLeftTrigger.value)
-      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem))
-      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
       //left climber goes down - left bumper
       new JoystickButton(controller1, Button.kLeftBumper.value) 
       .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftDown(), m_ClimberSubsystem))
       .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+      //right climber goes down - right bumper
+      new JoystickButton(controller1, Button.kRightBumper.value)
+      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
+      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
+      /*rightTrigger.whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem));
+      rightTrigger.whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+      leftTrigger.whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem));
+      leftTrigger.whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));*/
+      //left climber goes up - left trigger
+      commandController1.leftTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem));
+      commandController1.leftTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+      commandController1.rightTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem));
+      commandController1.rightTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
       }
 
       
