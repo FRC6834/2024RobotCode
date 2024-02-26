@@ -39,4 +39,9 @@ public class ClimberSubsystem extends SubsystemBase {
     public void stopLeftMotor(){
         climberLeft.set(0);
     }
+    //Resets encoders to zero
+    public void resetEncoder(){
+        climberLeft.getEncoder().setPosition(0.0);
+        climberRight.getEncoder().setPosition(0.0);
+    }
 }

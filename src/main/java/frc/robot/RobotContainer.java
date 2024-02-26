@@ -50,6 +50,7 @@ public class RobotContainer {
   
   protected ShooterSubsystem m_Shooter = null;
   protected ConveyorSubsystem m_Conveyor = null;
+  protected ClimberSubsystem m_Climber = null;
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -185,6 +186,12 @@ public class RobotContainer {
       m_Conveyor = new ConveyorSubsystem();
     }
     return m_Conveyor;
+  }
+  public ClimberSubsystem getClimberSubsystem(){
+    if(m_Climber == null){
+      m_Climber = new ClimberSubsystem();
+    }
+    return m_Climber;
   }
 }
 
