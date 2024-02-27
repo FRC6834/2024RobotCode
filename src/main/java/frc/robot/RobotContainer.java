@@ -48,9 +48,11 @@ public class RobotContainer {
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
   private final ConveyorSubsystem m_ConveyorSubsystem = new ConveyorSubsystem();
   
+  /*
   protected ShooterSubsystem m_Shooter = null;
   protected ConveyorSubsystem m_Conveyor = null;
   protected ClimberSubsystem m_Climber = null;
+  */
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
   CommandXboxController commandController1= new CommandXboxController(OIConstants.kDriverControllerPort);
@@ -173,6 +175,7 @@ public class RobotContainer {
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false, false));
   }
+  /*
   public ShooterSubsystem getShooterSubsystem(){
     if(m_ShooterSubsystem == null){
       m_Shooter = new ShooterSubsystem();
@@ -191,5 +194,6 @@ public class RobotContainer {
     }
     return m_Climber;
   }
+  */
 }
 

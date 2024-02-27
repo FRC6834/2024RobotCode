@@ -29,9 +29,9 @@ public class Robot extends TimedRobot {
 
   private double startTime;
 
-  private ShooterSubsystem m_ShooterSubsystem;
+  /*private ShooterSubsystem m_ShooterSubsystem;
   private ConveyorSubsystem m_ConveyorSubsystem;
-  private ClimberSubsystem m_ClimberSubsystem;
+  private ClimberSubsystem m_ClimberSubsystem;*/
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,8 +42,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_ClimberSubsystem = m_robotContainer.getClimberSubsystem();
-    m_ClimberSubsystem.resetEncoder();
+    //m_ClimberSubsystem = m_robotContainer.getClimberSubsystem();
+    //m_ClimberSubsystem.resetEncoder();
   }
 
   /**
@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_ShooterSubsystem = m_robotContainer.getShooterSubsystem();
-    m_ConveyorSubsystem = m_robotContainer.getConveyorSubsystem();
+    //m_ShooterSubsystem = m_robotContainer.getShooterSubsystem();
+    //m_ConveyorSubsystem = m_robotContainer.getConveyorSubsystem();
     startTime = Timer.getFPGATimestamp();
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -84,6 +84,7 @@ public class Robot extends TimedRobot {
      */
     //Code to shoot note during auto, testing to see where to put it
     // schedule the autonomous command (example)
+    /*
     while(startTime < 1){
       new RunCommand(() -> m_ShooterSubsystem.startMotor(), m_ShooterSubsystem);
       new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem);
@@ -91,6 +92,7 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    */
   }
 
   /** This function is called periodically during autonomous. */
