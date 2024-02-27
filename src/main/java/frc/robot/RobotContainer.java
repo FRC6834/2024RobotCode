@@ -14,7 +14,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -29,7 +28,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import java.util.List;
 
 /*
@@ -39,9 +37,7 @@ import java.util.List;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems
-  //private final IntakeSubsystem intake = new IntakeSubsystem();
-  //private final IntakeSubsystem shooter = new IntakeSubsystem();
+  //The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   private final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
@@ -53,9 +49,10 @@ public class RobotContainer {
   protected ConveyorSubsystem m_Conveyor = null;
   protected ClimberSubsystem m_Climber = null;
   */
+
   // The driver's controller
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
-  CommandXboxController commandController1= new CommandXboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController commandController1= new CommandXboxController(OIConstants.kDriverControllerPort); //Required for commands that use Triggers
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -87,46 +84,46 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+
     //Brakes for swerve
     new JoystickButton(controller1, Button.kX.value)
       .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-      //Runs intake + Conveyor - A Button
-      //conveyer is at half speed
-      new JoystickButton(controller1, Button.kA.value)
-        .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
-        .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
-        .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem))
-        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
-      //Runs Conveyer in Reverse - B button
-      new JoystickButton(controller1, Button.kB.value)
-        .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.backwardsMotor(), m_ConveyorSubsystem))
-        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
-      //Runs shooter + Conveyer - Y button full speed
-      new JoystickButton(controller1, Button.kY.value)
-        .whileTrue(new RunCommand(() -> m_ShooterSubsystem.startMotor(), m_ShooterSubsystem))
-        .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
-        .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem))
-        .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem));
-      //left climber goes down - left bumper
-      new JoystickButton(controller1, Button.kLeftBumper.value) 
-      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftDown(), m_ClimberSubsystem))
-      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
-      //right climber goes down - right bumper
-      new JoystickButton(controller1, Button.kRightBumper.value)
-      .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
-      .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-      /*rightTrigger.whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem));
-      rightTrigger.whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
-      leftTrigger.whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem));
-      leftTrigger.whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));*/
-      //left climber goes up - left trigger
-      commandController1.leftTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem));
-      commandController1.leftTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
-      commandController1.rightTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem));
-      commandController1.rightTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
-      }
+    
+    //Runs intake + Conveyor - A Button
+    new JoystickButton(controller1, Button.kA.value)
+      .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
+      .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
+      .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem))
+      .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
+    
+    //Runs Conveyor in Reverse - B button
+    new JoystickButton(controller1, Button.kB.value)
+      .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.backwardsMotor(), m_ConveyorSubsystem))
+      .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
 
-      
+    //Runs shooter + Conveyor - Y button full speed
+    new JoystickButton(controller1, Button.kY.value)
+      .whileTrue(new RunCommand(() -> m_ShooterSubsystem.startMotor(), m_ShooterSubsystem))
+      .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
+      .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem))
+      .whileFalse(new RunCommand(() -> m_ShooterSubsystem.stopMotor(), m_ShooterSubsystem));
+
+    //left climber goes down - left bumper
+    new JoystickButton(controller1, Button.kLeftBumper.value) 
+     .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftDown(), m_ClimberSubsystem))
+     .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+
+    //right climber goes down - right bumper
+    new JoystickButton(controller1, Button.kRightBumper.value)
+     .whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightDown(), m_ClimberSubsystem))
+     .whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
+
+    //Right and Left Climbers go up using Triggers
+    commandController1.leftTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberLeftUp(), m_ClimberSubsystem));
+    commandController1.leftTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopLeftMotor(), m_ClimberSubsystem));
+    commandController1.rightTrigger().whileTrue(new RunCommand(() -> m_ClimberSubsystem.climberRightUp(), m_ClimberSubsystem));
+    commandController1.rightTrigger().whileFalse(new RunCommand(() -> m_ClimberSubsystem.stopRightMotor(), m_ClimberSubsystem));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
