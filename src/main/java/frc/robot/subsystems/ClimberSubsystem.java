@@ -17,6 +17,9 @@ public class ClimberSubsystem extends SubsystemBase {
     //Left Climber goes Down
     public void climberLeftDown(){
         climberLeft.set(.60);
+        if (climberLeft.getEncoder().getPosition() <= -5){
+            climberLeft.stopMotor();
+        }
     }
 
     //Right Climber goes Up
@@ -27,6 +30,9 @@ public class ClimberSubsystem extends SubsystemBase {
     //Right Climber goes DOwn
     public void climberRightDown(){
         climberRight.set(-.60);
+        if (climberRight.getEncoder().getPosition() <= -5){
+            climberRight.stopMotor();
+        }
     }
 
     //Right Climber no go
