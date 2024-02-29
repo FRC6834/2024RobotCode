@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
+//Limelight Imports
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 /**
@@ -27,6 +31,12 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private double startTime;
+
+  private NetworkTable cam;
+  private NetworkTableEntry tx;
+  private NetworkTableEntry ty;
+  private NetworkTableEntry ta;
+
 
   /*private ShooterSubsystem m_ShooterSubsystem;
   private ConveyorSubsystem m_ConveyorSubsystem;
@@ -43,6 +53,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     //m_ClimberSubsystem = m_robotContainer.getClimberSubsystem();
     //m_ClimberSubsystem.resetEncoder();
+    cam = NetworkTableInstance.getDefault().getTable("limelight");
+    tx = cam.getEntry("tx");
+    ty = cam.getEntry("ty");
+    ta = cam.getEntry("ta");
   }
 
   /**
@@ -115,7 +129,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //read values periodically
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+
+    //post to smart dashboard periodically
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+  }
 
   @Override
   public void testInit() {
