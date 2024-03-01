@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import frc.commands.ScoreAuto;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -26,12 +25,15 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
+import frc.commands.FourCargoAuto;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -47,10 +49,9 @@ public class RobotContainer {
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
   private final ConveyorSubsystem m_ConveyorSubsystem = new ConveyorSubsystem();
   
-  
-  protected ShooterSubsystem m_Shooter = null;
+  /*protected ShooterSubsystem m_Shooter = null;
   protected ConveyorSubsystem m_Conveyor = null;
-  protected ClimberSubsystem m_Climber = null;
+  protected ClimberSubsystem m_Climber = null;*/
 
   private double startTime;
 
@@ -58,7 +59,7 @@ public class RobotContainer {
   XboxController controller1 = new XboxController(OIConstants.kDriverControllerPort);
   CommandXboxController commandController1= new CommandXboxController(OIConstants.kDriverControllerPort); //Required for commands that use Triggers
 
-  /**
+  /*
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
@@ -134,35 +135,29 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // Create config for trajectory
-    TrajectoryConfig config = new TrajectoryConfig(
+  public Command getAutonomousCommand(){
+    /*TrajectoryConfig config = new TrajectoryConfig(
         AutoConstants.kMaxSpeedMetersPerSecond,
         AutoConstants.kMaxAccelerationMetersPerSecondSquared)
         // Add kinematics to ensure max speed is actually obeyed
         .setKinematics(DriveConstants.kDriveKinematics);
+
     // An example trajectory to follow. All units in meters.
-    Trajectory backTrajectory = TrajectoryGenerator.generateTrajectory(
+    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(-1, 0), new Translation2d(-2, 0)),
+        List.of(new Translation2d(1, 0), new Translation2d(2, 0)),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(-3, 0, new Rotation2d(0)),
-        config.setReversed(true));
-
-    Trajectory forwardTrajectory = TrajectoryGenerator.generateTrajectory(
-      new Pose2d(0,0, new Rotation2d(0)),
-      List.of(new Translation2d(0,0), new Translation2d(0,0)),
-      new Pose2d(0,0, new Rotation2d(0)),
-      config.setReversed(false));
+        new Pose2d(3, 0, new Rotation2d(0)),
+        config);
 
     var thetaController = new ProfiledPIDController(
         AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-2*Math.PI, 2*Math.PI);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand backSwerveCommand = new SwerveControllerCommand(
-        backTrajectory,
+    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+        exampleTrajectory,
         m_robotDrive::getPose, // Functional interface to feed supplier
         DriveConstants.kDriveKinematics,
 
@@ -173,27 +168,15 @@ public class RobotContainer {
         m_robotDrive::setModuleStates,
         m_robotDrive);
 
-    SwerveControllerCommand forwardSwerveCommand = new SwerveControllerCommand(
-      forwardTrajectory,
-      m_robotDrive::getPose,
-      DriveConstants.kDriveKinematics,
-      new PIDController(AutoConstants.kPXController, 0, 0),
-        new PIDController(AutoConstants.kPYController, 0, 0),
-      thetaController,
-      m_robotDrive::setModuleStates,
-      m_robotDrive);
-
     // Reset odometry to the starting pose of the trajectory.
-    m_robotDrive.resetOdometry(backTrajectory.getInitialPose());
-    Command ScoreAuto = new ScoreAuto(m_ShooterSubsystem,m_ConveyorSubsystem);
-    
-    SequentialCommandGroup trajectory = new SequentialCommandGroup(ScoreAuto.withTimeout(1),backSwerveCommand,forwardSwerveCommand);
+    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return trajectory.andThen(()-> m_robotDrive.drive(0, 0, 0, false, false));
+    //return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false, false));*/
+    return new FourCargoAuto(m_robotDrive, m_IntakeSubsystem, m_ConveyorSubsystem, m_ShooterSubsystem);
   }
-  
-  public ShooterSubsystem getShooterSubsystem(){
+
+  /*public ShooterSubsystem getShooterSubsystem(){
     if(m_ShooterSubsystem == null){
       m_Shooter = new ShooterSubsystem();
     }
@@ -210,6 +193,5 @@ public class RobotContainer {
       m_Climber = new ClimberSubsystem();
     }
     return m_Climber;
-  }
+  }*/
 }
-
