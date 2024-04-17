@@ -9,14 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ConveyorSubsystem;
-import frc.robot.subsystems.ClimberSubsystem;
 //Limelight Imports
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+//usb camera import
+import edu.wpi.first.cameraserver.CameraServer;
 
 
 /**
@@ -55,6 +53,8 @@ public class Robot extends TimedRobot {
     tx = cam.getEntry("tx");
     ty = cam.getEntry("ty");
     ta = cam.getEntry("ta");
+    //
+    CameraServer.startAutomaticCapture();
   }
 
   /**
