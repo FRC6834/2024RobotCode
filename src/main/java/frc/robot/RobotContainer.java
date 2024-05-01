@@ -77,7 +77,7 @@ public class RobotContainer {
     //Runs intake + Conveyor - A Button
     new JoystickButton(controller1, Button.kA.value)
       .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
-      .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.halfForwardMotor(), m_ConveyorSubsystem))
+      .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
       .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem))
       .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
     

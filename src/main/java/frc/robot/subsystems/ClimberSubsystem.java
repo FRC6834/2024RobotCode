@@ -1,8 +1,6 @@
 package frc.robot.subsystems;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SubsystemConstants;
 
@@ -19,9 +17,6 @@ public class ClimberSubsystem extends SubsystemBase {
     //Left Climber goes Down
     public void climberLeftDown(){
         climberLeft.set(.75);
-        /*if (climberLeft.getEncoder().getPosition() >= 5){
-            climberLeft.stopMotor();
-        }*/
     }
 
     //Right Climber goes Up
@@ -32,9 +27,6 @@ public class ClimberSubsystem extends SubsystemBase {
     //Right Climber goes DOwn
     public void climberRightDown(){
         climberRight.set(-.75);
-        /*if (climberRight.getEncoder().getPosition() <= -5){
-            climberRight.stopMotor();
-        }*/
     }
 
     //Right Climber no go
@@ -46,11 +38,4 @@ public class ClimberSubsystem extends SubsystemBase {
     public void stopLeftMotor(){
         climberLeft.set(0);
     }
-    
-    //Resets encoders to zero
-    public void resetEncoder(){
-        climberLeft.getEncoder().setPosition(0.0);
-        climberRight.getEncoder().setPosition(0.0);
-    }
-
 }

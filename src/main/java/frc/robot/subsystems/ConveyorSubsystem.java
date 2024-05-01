@@ -28,4 +28,3 @@ public class ConveyorSubsystem extends SubsystemBase {
         conveyorMotor.set(0);
     }   
 }
-
