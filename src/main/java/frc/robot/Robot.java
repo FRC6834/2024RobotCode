@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     // tx = cam.getEntry("tx");
     // ty = cam.getEntry("ty");
     // ta = cam.getEntry("ta");
-    // CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
   }
 
   /**
