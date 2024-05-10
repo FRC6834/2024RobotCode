@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 // import edu.wpi.first.networktables.NetworkTableEntry;
 // import edu.wpi.first.networktables.NetworkTableInstance;
 //usb camera import
-import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cameraserver.CameraServer;
 
 
 /**
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     // tx = cam.getEntry("tx");
     // ty = cam.getEntry("ty");
     // ta = cam.getEntry("ta");
-    CameraServer.startAutomaticCapture();
+    //CameraServer.startAutomaticCapture();
   }
 
   /**
