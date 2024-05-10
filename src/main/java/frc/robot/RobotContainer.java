@@ -118,6 +118,6 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     // Run path following command, then stop at the end.
     //return new FourCargoAuto(m_robotDrive, m_IntakeSubsystem, m_ConveyorSubsystem, m_ShooterSubsystem);
-    return new SimpleAuto(m_robotDrive);
+    return new SimpleAuto(m_robotDrive, m_IntakeSubsystem, m_ConveyorSubsystem, m_ShooterSubsystem);
   }
 }
