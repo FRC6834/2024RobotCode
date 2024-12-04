@@ -20,17 +20,17 @@ public class SimpleAuto extends SequentialCommandGroup{
         addCommands(
 
           //shoots preloaded note
-          new ParallelCommandGroup(new ShooterCommand(shooter, conveyor)),
+          new ParallelCommandGroup(new ShooterCommand(shooter, conveyor)).withTimeout(1.5),
 
           //collects second note; drives backwards and uses intake at the same time
-          new ParallelCommandGroup(new DriveCommand(drive, -1.46,  1, 0, 0), new IntakeCommand(intake)),
+          new ParallelCommandGroup(new DriveCommand(drive, -1.46,  1, 0, 0), new IntakeCommand(intake)).withTimeout(1.5),
 
           //drive forward again and then shoots the collected note
-          new SequentialCommandGroup(new DriveCommand(drive, 1.46, 1, 0, 0), new ShooterCommand(shooter, conveyor)),
+          new SequentialCommandGroup(new DriveCommand(drive, 1.46, 1, 0, 0), new ShooterCommand(shooter, conveyor)).withTimeout(1.5),
 
           //leaves starting zone
-          new SequentialCommandGroup(new DriveCommand(drive, 2.9, 0, -1, 0), 
-          new DriveCommand(drive, 1.5, -1, 0, 0))  
+          new SequentialCommandGroup(new DriveCommand(drive, 2.9, 0, -1, 0).withTimeout(1.5), 
+          new DriveCommand(drive, 1.5, -1, 0, 0)).withTimeout(1.5)  
           //^^these two are a part of the same group i just set them on different lines for readability
 
         );
@@ -38,16 +38,16 @@ public class SimpleAuto extends SequentialCommandGroup{
         addCommands(
 
           //shoots preloaded note
-          new ParallelCommandGroup(new ShooterCommand(shooter, conveyor)),
+          new ParallelCommandGroup(new ShooterCommand(shooter, conveyor)).withTimeout(1.5),
 
           //leaves starting zone
-          new SequentialCommandGroup(new DriveCommand(drive, 2.9, 0, -1, 0), 
-          new DriveCommand(drive, 1.5, -1, 0, 0))  
+          new SequentialCommandGroup(new DriveCommand(drive, 2.9, 0, -1, 0).withTimeout(1.5), 
+          new DriveCommand(drive, 1.5, -1, 0, 0)).withTimeout(1.5)  
           //^^these two are a part of the same sequential command group i just set them on different lines for readability
         );
       } 
     }else{ //FIRST_NOTE = false
-      new DriveCommand(drive, 1.5, 1, 0, 0); //WILL NOT SHOOT NOTES; WILL ONLY DRIVE FORWARD (intended for use to gain leave points)
+      new DriveCommand(drive, 1.5, 1, 0, 0).withTimeout(1.5); //WILL NOT SHOOT NOTES; WILL ONLY DRIVE FORWARD (intended for use to gain leave points)
     }
   }
 }
