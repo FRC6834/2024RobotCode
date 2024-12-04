@@ -9,14 +9,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 
 public class SimpleAuto extends SequentialCommandGroup{
-  //whether or not the robot will go for a second note or if it will just leave the starting area after shooting the preloaded note
-  final boolean SECOND_NOTE = true;
+  //these bools are for whether or not the robot will go for a second note or if it will just leave the starting area after shooting the preloaded note
+  final boolean SECOND_NOTE = true; //if false robot will just go for a preload note and leave
   final boolean FIRST_NOTE = true; //if false robot will just go for leave points
 
   public SimpleAuto(DriveSubsystem drive, IntakeSubsystem intake, ConveyorSubsystem conveyor, ShooterSubsystem shooter){
     
     if(FIRST_NOTE){
-      if(SECOND_NOTE){
+      if(SECOND_NOTE){ //robot goes for 2 notes (FIRST_NOTE&&SECOND_NOTE)
         addCommands(
 
           //shoots preloaded note
@@ -34,6 +34,8 @@ public class SimpleAuto extends SequentialCommandGroup{
           //^^these two are a part of the same group i just set them on different lines for readability
 
         );
+
+
       }else{ //ROBOT WILL NOT GO AFTER 2ND NOTE (SECOND_NOTE = false)
         addCommands(
 
@@ -46,6 +48,8 @@ public class SimpleAuto extends SequentialCommandGroup{
           //^^these two are a part of the same sequential command group i just set them on different lines for readability
         );
       } 
+
+
     }else{ //FIRST_NOTE = false
       new DriveCommand(drive, 1.5, 1, 0, 0).withTimeout(1.5); //WILL NOT SHOOT NOTES; WILL ONLY DRIVE FORWARD (intended for use to gain leave points)
     }
