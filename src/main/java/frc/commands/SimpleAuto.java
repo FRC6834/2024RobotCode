@@ -10,8 +10,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class SimpleAuto extends SequentialCommandGroup{
   //whether or not the robot will go for a second note or if it will just leave the starting area after shooting the preloaded note
-  final boolean SECOND_NOTE = false;
-  final boolean FIRST_NOTE = false; //if false robot will just go for leave points
+  final boolean SECOND_NOTE = true;
+  final boolean FIRST_NOTE = true; //if false robot will just go for leave points
 
   public SimpleAuto(DriveSubsystem drive, IntakeSubsystem intake, ConveyorSubsystem conveyor, ShooterSubsystem shooter){
     
