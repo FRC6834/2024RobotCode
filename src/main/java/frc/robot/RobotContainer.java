@@ -33,6 +33,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
   private final ConveyorSubsystem m_ConveyorSubsystem = new ConveyorSubsystem();
+  private final testSubsystem m_TestSubsystem = new testSubsystem();
 
 
   // The driver's controller
@@ -73,13 +74,19 @@ public class RobotContainer {
     //Brakes for swerve
     new JoystickButton(controller1, Button.kX.value)
       .whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
+
+    //i dont think we r gonna use this code ever again since its 2025 but if u set this to false then it'll run the normal command instead of the limelight test 
+    final boolean debug = true;
+
     
     //Runs intake + Conveyor - A Button
     new JoystickButton(controller1, Button.kA.value)
+      if(!debug){
       .whileTrue(new RunCommand(() -> m_IntakeSubsystem.startMotor(), m_IntakeSubsystem))
       .whileTrue(new RunCommand(() -> m_ConveyorSubsystem.forwardMotor(), m_ConveyorSubsystem))
       .whileFalse(new RunCommand(() -> m_IntakeSubsystem.stopMotor(), m_IntakeSubsystem))
       .whileFalse(new RunCommand(() -> m_ConveyorSubsystem.stopMotor(), m_ConveyorSubsystem));
+    }else{.whileTrue(new RunCommand(() -> m_TestSubsystem.testLimelight(), m_TestSubsystem));}
     
     //Runs Conveyor in Reverse - B button
     new JoystickButton(controller1, Button.kB.value)
